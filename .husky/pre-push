@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+
+echo ""
+echo "🔒  [pre-push] Running production gate before pushing — this may take a minute."
+echo "    Steps: 1) ESLint   2) TypeScript   3) Production build"
+echo ""
+
+# 1 — Lint
+echo "▶  [pre-push] 1/3  Linting (pnpm lint)…"
+if ! pnpm run lint; then
+  echo ""
+  echo "❌  [pre-push] BLOCKED at step 1/3 — ESLint reported errors."
+  echo "    → Fix the files listed above, or run 'pnpm lint' locally to reproduce."
+  echo ""
+  exit 1
+fi
+
+# 2 — Type check
+echo ""
+echo "▶  [pre-push] 2/3  Type-checking (pnpm typecheck)…"
+if ! pnpm run typecheck; then
+  echo ""
+  echo "❌  [pre-push] BLOCKED at step 2/3 — TypeScript found type errors."
+  echo "    → Run 'pnpm typecheck' locally to see the full list."
+  echo ""
+  exit 1
+fi
+
+# 3 — Production build
+echo ""
+echo "▶  [pre-push] 3/3  Building (pnpm build)…"
+if ! pnpm run build; then
+  echo ""
+  echo "❌  [pre-push] BLOCKED at step 3/3 — the production build failed."
+  echo "    → Run 'pnpm build' locally to debug before pushing."
+  echo ""
+  exit 1
+fi
+
+echo ""
+echo "✅  [pre-push] All checks passed (lint · types · build). Pushing now…"
+echo ""

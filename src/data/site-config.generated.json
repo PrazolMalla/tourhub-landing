@@ -1,0 +1,255 @@
+{
+  "phone": "+977 985-1411830",
+  "whatsapp": "9779841906050",
+  "email": "info@nepalyatratours.com",
+  "address": "Shorakhutte, Kathmandu, Nepal",
+  "stat_travellers": "1,200+",
+  "stat_recommend": "98%",
+  "stat_countries": "40+",
+  "rating": "4.9",
+  "featured": null,
+  "nav": {
+    "trek": [
+      [
+        "Everest Region",
+        "everest",
+        [
+          [
+            "Everest Base Camp Trek",
+            "everest-base-camp-trek"
+          ],
+          [
+            "Everest View Trek",
+            "everest-view-trek"
+          ],
+          [
+            "Everest Base Camp Trek with Heli Return",
+            "everest-base-camp-trek-with-heli-return"
+          ]
+        ]
+      ],
+      [
+        "Annapurna Region",
+        "annapurna",
+        [
+          [
+            "Annapurna Base Camp Trek",
+            "annapurna-base-camp"
+          ],
+          [
+            "Annapurna Circuit Trek",
+            "annapurna-circuit-trek"
+          ],
+          [
+            "Mardi Himal Trek",
+            "mardi-himal-trek"
+          ],
+          [
+            "Sikles & Kapuche Lake Trek",
+            "sikles-kapuche-trek"
+          ],
+          [
+            "Ghorepani Poon Hill Trek",
+            "ghodepani-poon-hill-trek"
+          ],
+          [
+            "Khumai Danda Trek",
+            "khumai-danda"
+          ]
+        ]
+      ],
+      [
+        "Langtang Region",
+        "langtang",
+        [
+          [
+            "Gosaikunda Lake Trek",
+            "gosaikunda-lake-trek"
+          ],
+          [
+            "Langtang Valley Trek",
+            "langtang-valley-trek"
+          ],
+          [
+            "Langtang Valley & Gosaikunda Trek",
+            "trek-to-gosaikunda-lake-and-langtang"
+          ],
+          [
+            "Ama Yangri Trek",
+            "ama-yangri-trek"
+          ],
+          [
+            "Ruby Valley Trek",
+            "ruby-valley"
+          ],
+          [
+            "Panch Pokhari Trek",
+            "pach-pokhari-trek"
+          ]
+        ]
+      ],
+      [
+        "Manaslu Region",
+        "manaslu",
+        [
+          [
+            "Nage Pokhari Lake Trek — Gorkha, Ajirkot",
+            "nage-pokhari-lake-trek-gorkha-ajirkot"
+          ],
+          [
+            "Manaslu Circuit Trek",
+            "manaslu-circuit-trek"
+          ]
+        ]
+      ],
+      [
+        "Mustang / Muktinath",
+        "mustang",
+        [
+          [
+            "Upper Mustang Tour",
+            "upper-mustang-tour"
+          ]
+        ]
+      ]
+    ],
+    "tours": [
+      [
+        "City & Sightseeing",
+        "city",
+        [
+          [
+            "Lumbini & Chitwan Tour",
+            "lumbini-and-chitwan-tour"
+          ],
+          [
+            "Lumbini Tour",
+            "lumbini-tour"
+          ],
+          [
+            "Ghandruk Village Tour",
+            "ghandruk-village"
+          ],
+          [
+            "Ilam Tea Hills Tour",
+            "ilam-tour"
+          ],
+          [
+            "Chandragiri Hill Tour",
+            "chandragiri-hill"
+          ],
+          [
+            "Pokhara City Tour",
+            "pokhara-tour"
+          ],
+          [
+            "Janakpur Tour",
+            "janakpur-tour"
+          ]
+        ]
+      ],
+      [
+        "Pilgrimage & Spiritual",
+        "religious",
+        [
+          [
+            "Muktinath Temple Tour",
+            "muktinath-temple-tour"
+          ],
+          [
+            "Lumbini & Chitwan Tour",
+            "lumbini-and-chitwan-tour"
+          ],
+          [
+            "Lumbini Tour",
+            "lumbini-tour"
+          ],
+          [
+            "Janakpur Tour",
+            "janakpur-tour"
+          ]
+        ]
+      ],
+      [
+        "Helicopter & Luxury",
+        "helicopter",
+        [
+          [
+            "Everest Base Camp Trek with Heli Return",
+            "everest-base-camp-trek-with-heli-return"
+          ],
+          [
+            "Everest Base Camp Helicopter Tour",
+            "everest-base-camp-helicopter-tour"
+          ]
+        ]
+      ],
+      [
+        "Adventure & Rafting",
+        "adventure",
+        [
+          [
+            "Everest Base Camp Helicopter Tour",
+            "everest-base-camp-helicopter-tour"
+          ],
+          [
+            "Trishuli River Rafting",
+            "trishuli-river-rafting"
+          ]
+        ]
+      ],
+      [
+        "Resorts & Night Stays",
+        "nightstay",
+        [
+          [
+            "City Lights Farm House",
+            "city-lights-farm-house"
+          ],
+          [
+            "Kulekhani Day & Night Trip",
+            "kulekhani-trip"
+          ],
+          [
+            "Trishuli Villa Resort Stay",
+            "trishuli-villa"
+          ]
+        ]
+      ],
+      [
+        "Student & Group",
+        "student",
+        [
+          [
+            "Mustang Tour (Student Special)",
+            "mustang-tour-2"
+          ],
+          [
+            "Barahsinghe Brewery Student Tour",
+            "barahsinghe-student-tour"
+          ],
+          [
+            "Industrial & Educational Tour in Nepal",
+            "industrial-and-educational-tour-in-nepal"
+          ],
+          [
+            "Pokhara to Ghandruk Tour",
+            "pokhara-to-ghundruk"
+          ],
+          [
+            "Ghandruk Village Tour",
+            "ghandruk-village"
+          ],
+          [
+            "Ilam Tea Hills Tour",
+            "ilam-tour"
+          ],
+          [
+            "Chandragiri Hill Tour",
+            "chandragiri-hill"
+          ]
+        ]
+      ]
+    ]
+  }
+}

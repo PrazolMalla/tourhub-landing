@@ -1,0 +1,1800 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   Nepal Yatra — Tailwind v4 theme (design tokens)
+   These expose the design system as utilities (bg-gold, text-ink,
+   rounded-lg, font-serif, ...) while the legacy :root vars below
+   keep the ported component CSS working verbatim.
+   ============================================================ */
+@theme {
+  --font-serif: var(--font-display), Georgia, serif;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, monospace;
+
+  /* neutrals */
+  --color-ink: #0c0d0e;
+  --color-ink-2: #16181a;
+  --color-ink-3: #20242a;
+  --color-paper: #fdfff7;
+  --color-paper-2: #efefef;
+  --color-line: #eae6dd;
+  --color-muted: #6b6459;
+  --color-muted-d: #a9a194;
+
+  /* accent — valley green */
+  --color-gold: #f28c2a;
+  --color-gold-deep: #e6770f;
+  --color-gold-soft: #f8cba0;
+  --color-green-btn: #f28c2a;
+  --color-alpine: oklch(0.55 0.05 230);
+
+  /* semantic palette */
+  --color-primary: oklch(0.56 0.13 154);
+  --color-primary-hover: oklch(0.5 0.12 154);
+  --color-secondary: #0c0d0e;
+  --color-accent: oklch(0.64 0.13 156);
+  --color-background: #ffffff;
+  --color-foreground: #0c0d0e;
+  --color-border: #eae6dd;
+  --color-success: #1f7a4d;
+  --color-success-bg: #e8f5ee;
+  --color-warning: #b5803c;
+  --color-error: #b5543c;
+  --color-whatsapp: #25d366;
+
+  /* radius scale — flattened to a single 4px box radius project-wide
+     (pill stays round for chips/circles that opt into rounded-full) */
+  --radius-sm: 4px;
+  --radius: 4px;
+  --radius-lg: 4px;
+  --radius-pill: 999px;
+
+  /* box shadows removed globally */
+  --shadow-card: none;
+  --shadow-card-sm: none;
+
+  --animate-cloud-float: cloudFloat 5s ease-in-out infinite;
+  --animate-cloud-float-delayed: cloudFloat 16s ease-in-out infinite;
+  --animate-cloud-float-slow: cloudFloat 20s ease-in-out infinite;
+
+  @keyframes cloudFloat {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+}
+
+/* ============================================================
+   Ported design tokens + base + components from the original
+   styles.css / components.css / pages.css (UI preserved 1:1).
+   ============================================================ */
+
+/* ImageSlot: the React component renders <div class="image-slot"><img/></div>.
+   `position: relative` makes it a containing block for next/image `fill`;
+   contexts that set `position: absolute` (e.g. `.region .image-slot`) win. */
+.image-slot {
+  position: relative;
+}
+
+.image-slot > img,
+.image-slot > .image-slot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ============================================================
+   Nepal Yatra — Tour & Travels  |  Design tokens + base
+   ============================================================ */
+:root {
+  /* neutrals (warm) */
+  --ink: #0c0d0e;
+  --ink-2: #16181a;
+  --ink-3: #20242a;
+  --paper-2: #efefef;
+  --paper: #fdfff7;
+  --line: #eae6dd;
+  --line-dark: rgba(255, 255, 255, 0.12);
+  --muted-d: #a9a194;
+
+  /* accent — valley green (kept the --gold var names so all accents recolor at once) */
+  --gold: #f28c2a;
+  --gold-deep: #e6770f;
+  --gold-soft: oklch(0.93 0.06 152);
+  --green-btn: #f28c2a;
+
+  /* cool alpine (used sparingly for tags) */
+  --alpine: oklch(0.55 0.05 230);
+
+  /* GLOBAL content width — the single knob for how wide every .wrap container
+     (header, hero, sections, footer) can grow on large screens. Bump this to
+     widen content site-wide; the responsive --gut keeps small screens padded. */
+  --maxw: 1640px;
+  --gut: clamp(30px, 5vw, 64px);
+
+  /* GLOBAL section vertical padding — the single knob for vertical spacing
+     between sections across the whole site. Change this one value (e.g. 40px,
+     60px, 80px) to tighten or loosen every section + CTA band at once.
+     (was clamp(76px, 10vw, 156px)) */
+  --section-py: 60px;
+
+  /* single 4px box radius project-wide (pill kept for rounded-full circles) */
+  --r-sm: 4px;
+  --r: 4px;
+  --r-lg: 4px;
+  --r-pill: 999px;
+
+  /* box shadows removed globally; --ring kept for keyboard focus accessibility */
+  --shadow: none;
+  --shadow-sm: none;
+  --ring: oklch(0.708 0 0);
+
+  --serif: var(--font-dm-serif), Georgia, serif;
+  --sans: var(--font-jakarta), system-ui, sans-serif;
+  --mono: var(--font-space-mono), ui-monospace, monospace;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+/* Element resets live in @layer base so Tailwind utilities (which sit in the
+   later `utilities` layer) can override them — e.g. a text-color utility on an
+   <a> beats this `color: inherit`. Unlayered design component classes (.btn,
+   .hero, …) still win over utilities, which is intended until they're ported. */
+@layer base {
+  * {
+    box-sizing: border-box;
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: visible;
+    @apply font-sans;
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper-2);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    @apply bg-background text-foreground;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+}
+
+/* modern, accessible focus ring — only for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline-offset: 4px;
+  border-radius: var(--r-sm);
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.04;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+}
+
+/* ============================================================
+   Legacy design-system + component CSS lives in @layer components
+   so Tailwind utilities (the later `utilities` layer) always win
+   over these classes during the migration. As each component is
+   ported its rules are deleted; what remains here is still the
+   source of truth for not-yet-ported markup.
+   ============================================================ */
+@layer components {
+  .wrap {
+    max-width: 1640px;
+    width: 100%;
+    margin: 0 auto;
+    padding-inline: clamp(24px, 4vw, 60px);
+  }
+}
+
+/* eyebrow / overline */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gold-deep);
+  font-weight: 700;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.eyebrow.center::after {
+  content: '';
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.eyebrow.on-dark {
+  color: #fff;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+}
+
+.eyebrow.on-dark::before,
+.eyebrow.on-dark.center::after {
+  background: var(--gold);
+  opacity: 1;
+}
+
+.section {
+  padding-block: var(--section-py);
+}
+
+/* buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 15.5px;
+  letter-spacing: 0.01em;
+  padding: 14px 24px;
+  border-radius: 4px;
+  transition:
+    transform 0.25s cubic-bezier(0.2, 0.7, 0.3, 1),
+    background 0.25s,
+    color 0.25s,
+    box-shadow 0.25s;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.985);
+}
+
+.btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+.btn-gold {
+  background: var(--green-btn);
+  color: #fff;
+}
+
+.btn-gold:hover {
+  background: var(--gold-deep);
+  transform: translateY(-1px);
+}
+
+.btn-ink {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn-ink:hover {
+  background: var(--ink-3);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.btn-ghost:hover {
+  box-shadow: inset 0 0 0 1px var(--ink);
+  transform: translateY(-1px);
+}
+
+.btn-ghost-d {
+  background: transparent;
+  color: #fff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+.btn-ghost-d:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px #fff;
+  transform: translateY(-1px);
+}
+
+/* Scroll-reveal — visible end-state is the BASE so content can never get stuck
+   hidden; we only hide (and animate) when JS is present, with a keyframe and a
+   JS safety net (app.js) that forces visibility if the timeline ever stalls. */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* Reveal state is driven by a `data-revealed` attribute (set by JS after
+   hydration) rather than a class, so it never clashes with React-managed
+   className during streamed hydration. The legacy `.in` class is kept as a
+   fallback selector for safety. */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+html.js .reveal[data-revealed],
+html.js .reveal.in {
+  animation: revealIn 0.75s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+@keyframes revealIn {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  html.js .reveal[data-revealed],
+  html.js .reveal.in {
+    animation: none;
+  }
+}
+
+/* image slot polish */
+.image-slot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  --slot-bg: #1a1c1f;
+}
+
+/* ===== components.css ===== */
+
+/* ============================================================
+   Nepal Yatra — components & sections
+   ============================================================ */
+
+/* ---------- Top + header overlay ---------- */
+/* ---------- Header chrome (site-top, topbar, nav, brand, nav-links, burger,
+   nav-top10 button) is authored with Tailwind utilities in SiteHeader.tsx.
+   Only the hover-revealed menu coupling (.nav-item / .nav-top10-wrap and the
+   dropdown/megamenu panels) remains here. ---------- */
+.nav-item {
+  position: relative;
+}
+
+.nav-item > button svg {
+  width: 13px;
+  height: 13px;
+  opacity: 0.7;
+  transition: transform 0.25s;
+}
+
+.nav-item:hover > button svg {
+  transform: rotate(180deg);
+}
+
+/* dropdown */
+
+/* invisible bridge so the menu stays open while the cursor crosses the gap */
+
+.nav-item:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* solid (scrolled) handled on .site-top */
+
+/* ---------- Top 10 Treks mega menu (button is Tailwind utilities in
+   SiteHeader.tsx; this wrapper + panel drive the hover reveal) ---------- */
+.nav-top10-wrap {
+  position: relative;
+}
+
+.megamenu {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  width: 600px;
+  max-width: 88vw;
+  background: #fff;
+  color: var(--ink);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  padding: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition:
+    opacity 0.22s,
+    transform 0.22s;
+  z-index: 90;
+}
+
+.megamenu::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -18px;
+  height: 20px;
+}
+
+.nav-top10-wrap:hover .megamenu {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.mega-foot .btn {
+  width: 100%;
+}
+
+/* mobile drawer */
+
+.drawer.open {
+  visibility: visible;
+}
+
+.drawer.open .drawer-scrim {
+  opacity: 1;
+}
+
+.drawer.open .drawer-panel {
+  transform: none;
+}
+
+/* ---------- Hero ---------- */
+
+.hero-media .image-slot {
+  --slot-bg: #101316;
+}
+
+/* cinematic photo montage — crossfading slides each with a slow Ken Burns push */
+
+@keyframes heroZoom {
+  from {
+    transform: scale(1.02);
+  }
+
+  to {
+    transform: scale(1.14);
+  }
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1.06);
+  }
+
+  to {
+    transform: scale(1.18);
+  }
+}
+
+/* hero background video — desktop only, sits over the poster image once playing */
+
+@keyframes scrolly {
+  0% {
+    transform: scaleY(0.2);
+    transform-origin: top;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 0;
+  }
+}
+
+/* search / quick plan bar */
+
+.planbar .pgo .btn {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--r);
+}
+
+@media (max-width: 900px) {
+  .planbar .pgo .btn {
+    padding: 15px;
+  }
+}
+
+/* ---------- Trusted partners / affiliations ---------- */
+
+.trust-head .eyebrow {
+  justify-content: center;
+}
+
+/* ---------- Section heads ---------- */
+.shead {
+  gap: 30px;
+  margin-bottom: 36px;
+}
+
+.shead h2 {
+  font-size: clamp(38px, 5vw, 48px);
+  letter-spacing: -0.018em;
+}
+
+.shead.dark h2 {
+  color: #fff;
+}
+
+.shead .lead {
+  color: var(--muted);
+  max-width: 42ch;
+}
+
+.shead.dark .lead {
+  color: var(--muted-d);
+}
+
+@media (max-width: 760px) {
+  .shead {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+}
+
+/* ---------- Categories ---------- */
+
+.cat {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  min-height: 230px;
+  display: flex;
+  color: #fff;
+  isolation: isolate;
+  box-shadow: var(--shadow-sm);
+}
+
+.cat .cat-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.cat .cat-media .image-slot {
+  --slot-bg: #15181b;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.cat::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(12, 13, 14, 0.1) 30%, rgba(12, 13, 14, 0.86) 100%);
+}
+
+.cat:hover .cat-media .image-slot {
+  transform: scale(1.06);
+}
+
+.cat .arrow {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-6px);
+  opacity: 0;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+}
+
+.cat .arrow svg {
+  width: 17px;
+  height: 17px;
+}
+
+.cat:hover .arrow {
+  opacity: 1;
+  transform: none;
+}
+
+.cat.tall {
+  grid-row: span 2;
+}
+
+@media (max-width: 980px) {
+  .cat.tall {
+    grid-row: span 1;
+  }
+}
+
+/* ---------- Featured trips ---------- */
+
+.filterbar button.active {
+  background: var(--green-btn);
+  color: #fff;
+  box-shadow: none;
+}
+
+.trip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* sliding carousel (transform-driven) */
+
+.trip-track {
+  display: flex;
+  gap: 20px;
+}
+
+.trip-track > .trip {
+  flex: 0 0 calc((100% - 60px) / 4);
+  scroll-snap-align: start;
+}
+
+.slider-arrow.next {
+  right: -22px;
+}
+
+.slider-dots button.active {
+  background: var(--green-btn);
+  transform: scale(1.25);
+}
+
+@media (max-width: 1180px) {
+  .slider-arrow.next {
+    right: 6px;
+  }
+
+  .trip-track > .trip {
+    flex: 0 0 calc((100% - 40px) / 3);
+  }
+
+  .trip-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 980px) {
+  .trip-track > .trip {
+    flex: 0 0 calc((100% - 20px) / 2);
+  }
+}
+
+@media (max-width: 620px) {
+  .trip-track > .trip {
+    flex: 0 0 84%;
+  }
+}
+
+.trip {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1),
+    box-shadow 0.35s;
+  box-shadow: none;
+}
+
+.trip:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow);
+}
+
+.trip-media .image-slot {
+  --slot-bg: #e7e1d5;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.trip:hover .trip-media .image-slot {
+  transform: scale(1.05);
+}
+
+.trip:hover .trip-arrow {
+  background: var(--green-btn);
+  color: #fff;
+}
+
+@media (max-width: 980px) {
+  .trip-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .trip-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- About / why us ---------- */
+.about {
+  background: var(--paper);
+  position: relative;
+}
+
+.about h2 {
+  font-size: clamp(36px, 4.8vw, 66px);
+  margin-top: 18px;
+  letter-spacing: -0.018em;
+}
+
+.about .lede {
+  color: var(--muted);
+  margin-top: 22px;
+  font-size: 18px;
+}
+
+.feat {
+  display: flex;
+  gap: 18px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.feat .fi {
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feat .fi svg {
+  width: 21px;
+  height: 21px;
+}
+
+.feat h4 {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 17px;
+}
+
+.feat p {
+  color: var(--muted);
+  font-size: 15px;
+  margin-top: 4px;
+}
+
+.about .about-cta {
+  margin-top: 32px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* keep decorative bleed inside the viewport on phones (no horizontal scroll) */
+
+/* ---------- Destinations / regions ---------- */
+.regions {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.region {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  color: #fff;
+  display: flex;
+  isolation: isolate;
+}
+
+.region .image-slot {
+  --slot-bg: #15181b;
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.region::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(12, 13, 14, 0.05) 35%, rgba(12, 13, 14, 0.88) 100%);
+}
+
+.region:hover .image-slot {
+  transform: scale(1.06);
+}
+
+.region .rb {
+  margin-top: auto;
+  padding: 20px;
+}
+
+.region .rb .rn {
+  font-family: var(--serif);
+  font-size: 31px;
+  letter-spacing: -0.01em;
+}
+
+.region .rb .rm {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.region .rb .rm .dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.region.r-wide {
+  grid-column: span 3;
+  grid-row: span 1;
+}
+
+.region.r-big {
+  grid-column: span 3;
+  grid-row: span 2;
+}
+
+.region.r-sm {
+  grid-column: span 2;
+}
+
+.region.r-tall {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+@media (max-width: 900px) {
+  .region.r-wide,
+  .region.r-big,
+  .region.r-sm,
+  .region.r-tall {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .region.r-big {
+    grid-column: span 2;
+  }
+}
+
+/* ---------- Testimonials ---------- */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Blog ---------- */
+.blog {
+  background: var(--paper);
+}
+
+.post-media .image-slot {
+  --slot-bg: #e7e1d5;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.post:hover .post-media .image-slot {
+  transform: scale(1.05);
+}
+
+/* ---------- CTA band ---------- */
+
+.cta-media .image-slot {
+  --slot-bg: #101316;
+}
+
+.cta-actions {
+  margin-top: 34px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.cta-actions .or {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted-d);
+}
+
+/* ---------- Footer ---------- */
+
+/* floating whatsapp */
+
+@keyframes wapulse {
+  70% {
+    box-shadow: 0 0 0 16px rgba(37, 211, 102, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+/* form success note */
+
+/* ===== Affiliations marquee (auto-scrolling logo slider) ===== */
+
+@keyframes partnerScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ===== HM no-gap fill: nothing renders as empty white ===== */
+.image-slot {
+  background: linear-gradient(150deg, #22332b, #16201b 55%, #0c0d0e);
+  border-radius: inherit;
+}
+
+.img-ph {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 160px;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px 18px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--serif, 'DM Serif Display', serif);
+  font-size: 17px;
+  background: linear-gradient(150deg, #22332b, #16201b 55%, #0c0d0e);
+}
+
+.img-ph span {
+  position: relative;
+  z-index: 2;
+}
+
+/* mobile drawer accordions */
+
+/* ===== Trekking mega-menu (lists every trek by region) ===== */
+.trekmega {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: min(720px, 90vw);
+  background: #fff;
+  color: var(--ink);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition:
+    opacity 0.22s,
+    transform 0.22s;
+  z-index: 90;
+}
+
+.trekmega::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -14px;
+  height: 16px;
+}
+
+.nav-item:hover .trekmega {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+@media (max-width: 1180px) {
+  .trekmega {
+    width: min(620px, 92vw);
+  }
+}
+
+/* homepage reviews extras */
+
+.testi-ta {
+  margin-left: auto;
+  align-self: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  white-space: nowrap;
+}
+
+@media (max-width: 680px) {
+  .testi-ta {
+    width: 100%;
+    margin: 10px 0 0;
+    text-align: center;
+  }
+}
+
+/* tours mega-menu opens right-aligned so it never overflows the viewport */
+.trekmega.tm-right {
+  left: auto;
+  right: 0;
+}
+
+/* ===== pages.css ===== */
+
+/* ============================================================
+   Nepal Yatra — subpage components (detail, listing, about, contact)
+   Loads after styles.css + components.css
+   ============================================================ */
+
+/* active nav link → Tailwind utilities in SiteHeader.tsx (linkCls) */
+
+/* ---------- Page banner ---------- */
+.pbanner {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  color: #fff;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.pbanner-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.pbanner-media .image-slot {
+  --slot-bg: #101316;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pbanner-media .image-slot {
+    animation: kenburns 28s ease-in-out infinite alternate;
+    transform-origin: 60% 40%;
+  }
+}
+
+.pbanner-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 11, 12, 0.5) 0%,
+    rgba(10, 11, 12, 0.25) 35%,
+    rgba(10, 11, 12, 0.78) 100%
+  );
+}
+
+.pbanner-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  padding: 0;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pbanner-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 11, 12, 0.5) 0%,
+    rgba(10, 11, 12, 0.25) 35%,
+    rgba(10, 11, 12, 0.78) 100%
+  );
+}
+
+.pbanner h1 {
+  font-size: clamp(40px, 6.2vw, 84px);
+  max-width: 18ch;
+  letter-spacing: -0.022em;
+}
+
+.pbanner .psub {
+  margin-top: 18px;
+  max-width: 56ch;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: clamp(15px, 1.4vw, 18px);
+}
+
+.pbanner .ptags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.ptag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 7px 13px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ptag.gold {
+  background: var(--green-btn);
+  color: #fff;
+}
+
+.ptag svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* ---------- Fact bar ---------- */
+
+.factbar .wrap {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 900px) {
+  .factbar .wrap {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .factbar .wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Detail layout ---------- */
+
+/* highlights */
+
+/* itinerary accordion */
+
+.day.open {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--gold);
+}
+
+.day.open .day-num {
+  background: var(--green-btn);
+}
+
+.day.open .day-tog {
+  transform: rotate(45deg);
+  background: var(--green-btn);
+  color: #fff;
+}
+
+.day.open .day-body {
+  grid-template-rows: 1fr;
+}
+
+/* altitude profile */
+
+/* cost includes/excludes */
+
+/* gallery */
+
+.gallery .image-slot {
+  --slot-bg: #e7e1d5;
+  border-radius: var(--r-lg);
+  width: 100%;
+  height: 100%;
+}
+
+/* booking sidebar */
+
+.book-card .btn {
+  width: 100%;
+}
+
+/* ---------- Listing page ---------- */
+
+.chips button.active {
+  background: var(--green-btn);
+  color: #fff;
+  box-shadow: none;
+}
+
+.list-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.list-grid .trip {
+  background: #fff;
+}
+
+@media (max-width: 1280px) {
+  .list-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 980px) {
+  .list-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .list-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- About page ---------- */
+
+.story-media .image-slot {
+  --slot-bg: #e7e1d5;
+  width: 100%;
+  height: 100%;
+}
+
+.member .image-slot {
+  --slot-bg: #e7e1d5;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--r-lg);
+  margin-bottom: 16px;
+}
+
+/* ---------- Contact page ---------- */
+
+.cf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+
+.cf-field label {
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cf-field input,
+.cf-field select,
+.cf-field textarea {
+  font: inherit;
+  font-size: 15px;
+  padding: 13px 15px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: transparent;
+  color: var(--ink);
+  width: 100%;
+}
+
+.cf-field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.cf-field input:focus,
+.cf-field select:focus,
+.cf-field textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.map-embed .image-slot {
+  width: 100%;
+  height: 100%;
+  --slot-bg: #1a1c1f;
+}
+
+/* ---------- shared CTA reuse on subpages already in components.css ---------- */
+
+/* ---------- Hire a Vehicle ---------- */
+
+.vehicle {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1),
+    box-shadow 0.35s;
+}
+
+.vehicle:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+}
+
+.vehicle-media .image-slot {
+  --slot-bg: #e7e1d5;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.vehicle:hover .vehicle-media .image-slot {
+  transform: scale(1.05);
+}
+
+.vehicle-foot .btn {
+  padding: 11px 18px;
+  font-size: 14px;
+}
+
+/* ===== How booking works ===== */
+
+/* ===== Mobile sticky book bar ===== */
+
+@media (max-width: 980px) {
+  .mbook .btn {
+    flex: 1;
+  }
+}
+
+.book-note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  text-align: center;
+  margin: 4px 2px 2px;
+}
+
+a.ptag {
+  text-decoration: none;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+a.ptag:hover {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+
+/* ===== Traveller reviews (trip page) ===== */
+
+/* =========================================================
+   BLOG — index + article
+   ========================================================= */
+
+.eyebrow.light {
+  color: var(--gold);
+}
+
+/* blog index grid */
+
+.bi-filter .chip.active {
+  background: var(--green-btn, var(--gold));
+  color: #fff;
+  box-shadow: none;
+}
+
+.bi-card.feat {
+  grid-column: span 3;
+  flex-direction: row;
+}
+
+.bi-card.feat .bi-media {
+  width: 52%;
+  aspect-ratio: auto;
+}
+
+.bi-card.feat .bi-body {
+  justify-content: center;
+  padding: 34px 38px;
+}
+
+.bi-card.feat .bi-body h3 {
+  font-size: 27px;
+}
+
+.bi-card.feat .bi-body p {
+  font-size: 15.5px;
+  max-width: 46ch;
+}
+
+@media (max-width: 900px) {
+  .bi-card.feat {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 620px) {
+  .bi-card.feat {
+    grid-column: span 1;
+    flex-direction: column;
+  }
+
+  .bi-card.feat .bi-media {
+    width: 100%;
+    aspect-ratio: 16/10;
+  }
+
+  .bi-card.feat .bi-body {
+    padding: 20px;
+  }
+
+  .bi-card.feat .bi-body h3 {
+    font-size: 21px;
+  }
+}
+
+.art-body h1 {
+  font-family: var(--serif);
+  font-size: 32px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 38px 0 14px;
+  scroll-margin-top: 90px;
+}
+
+.art-body h2 {
+  font-family: var(--serif);
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 38px 0 14px;
+  scroll-margin-top: 90px;
+}
+
+.art-body h3 {
+  font-family: var(--serif);
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 38px 0 14px;
+  scroll-margin-top: 90px;
+}
+
+.art-body p {
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--slate, #3a4452);
+  margin-bottom: 18px;
+}
+
+/* related reads */
+
+/* CTA block reuse for blog index */
+
+/* end @layer components (legacy design-system + component CSS) */
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* blog index grid */
+
+.bi-filter .chip.active {
+  background: var(--green-btn, var(--gold));
+  color: #fff;
+  box-shadow: none;
+}
+
+.bi-card.feat {
+  grid-column: span 3;
+  flex-direction: row;
+}
+
+.bi-card.feat .bi-media {
+  width: 52%;
+  aspect-ratio: auto;
+}
+
+.bi-card.feat .bi-body {
+  justify-content: center;
+  padding: 34px 38px;
+}
+
+.bi-card.feat .bi-body h3 {
+  font-size: 27px;
+}
+
+.bi-card.feat .bi-body p {
+  font-size: 15.5px;
+  max-width: 46ch;
+}
+
+@media (max-width: 900px) {
+  .bi-card.feat {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 620px) {
+  .bi-card.feat {
+    grid-column: span 1;
+    flex-direction: column;
+  }
+
+  .bi-card.feat .bi-media {
+    width: 100%;
+    aspect-ratio: 16/10;
+  }
+
+  .bi-card.feat .bi-body {
+    padding: 20px;
+  }
+
+  .bi-card.feat .bi-body h3 {
+    font-size: 21px;
+  }
+}
+
+/* article */
+
+.art-body h2 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.8vw, 28px);
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 38px 0 14px;
+  scroll-margin-top: 90px;
+}
+
+.art-body p {
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--slate, #3a4452);
+  margin-bottom: 18px;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-zoom {
+  0% {
+    top: var(--zt);
+    left: var(--zl);
+    width: var(--zw);
+    height: var(--zh);
+
+    border-top-left-radius: 1000px;
+  }
+
+  100% {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    border-top-left-radius: 0;
+  }
+}
+
+.gallery-lightbox .yarl__container .yarl__flex_center {
+  background-color: rgb(0 0 0 / 0.45) !important;
+}
+
+.PhoneInput {
+  align-items: center;
+  display: flex;
+  background: transparent;
+  border: none;
+}
+
+/* related reads */
+
+/* CTA block reuse for blog index */
+
+/* end @layer components (legacy design-system + component CSS) */

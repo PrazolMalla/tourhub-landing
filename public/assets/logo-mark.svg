@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Nepal Yatra">
+  <circle cx="32" cy="32" r="31" fill="#2f8f5b"/>
+  <circle cx="32" cy="32" r="27" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.5"/>
+  <text x="32" y="41.5" text-anchor="middle" font-family="Georgia, &apos;Times New Roman&apos;, serif" font-size="26" font-weight="700" fill="#ffffff" letter-spacing="-0.5">NY</text>
+</svg>
